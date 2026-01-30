@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Globe, Car, Sparkles } from "lucide-react";
+import { ArrowUpRight, Home, Car, TreePine } from "lucide-react";
 
 const projects = [
   {
@@ -8,7 +8,7 @@ const projects = [
     category: "Web Platform",
     description:
       "A sophisticated web platform enabling real-time collaborative experiences for interactive room management and event coordination.",
-    icon: Globe,
+    icon: Home,
     tech: ["React", "Firebase", "Real-time DB"],
     color: "#3b82f6",
     image: "linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1e1b4b 100%)",
@@ -28,7 +28,7 @@ const projects = [
     category: "Interactive AR",
     description:
       "A magical interactive AR experience bringing holiday decorations to life with gesture controls and dynamic animations.",
-    icon: Sparkles,
+    icon: TreePine,
     tech: ["Unity", "WebXR", "Spatial Audio"],
     color: "#fbbf24",
     image: "linear-gradient(135deg, #422006 0%, #1e1b4b 50%, #0f172a 100%)",
