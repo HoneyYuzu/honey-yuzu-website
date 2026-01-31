@@ -50,13 +50,15 @@ export function HeroSection() {
 
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-          <Button
-            size="lg"
-            className="bg-[#fbbf24] hover:bg-[#f59e0b] text-[#050816] font-semibold px-8 py-6 text-lg group transition-all duration-300 hover:shadow-[0_0_40px_rgba(251,191,36,0.4)]"
-          >
-            View Our Work
-            <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
-          </Button>
+            <a href="https://github.com/HoneyYuzu" target="_blank" rel="noopener noreferrer">
+            <Button
+              size="lg"
+              className="bg-[#fbbf24] hover:bg-[#f59e0b] text-[#050816] font-semibold px-8 py-6 text-lg group transition-all duration-300 hover:shadow-[0_0_40px_rgba(251,191,36,0.4)]"
+            >
+              View Our Work
+              <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
+            </Button>
+            </a>
           <Button
             variant="outline"
             size="lg"
