@@ -1,32 +1,32 @@
 "use client";
 
-import { Code2, Smartphone, View, ArrowUpRight } from "lucide-react";
+import { Code2, Smartphone, Gamepad2, ArrowUpRight } from "lucide-react";
 
 const services = [
   {
     icon: Code2,
-    title: "Web Development",
+    title: "Web Applications",
     description:
-      "Scalable, performant web applications built with modern frameworks. From complex dashboards to seamless user experiences.",
-    features: ["React & Next.js", "Real-time Systems", "Cloud Infrastructure"],
+      "High-quality web applications built with React, Next.js, Supabase and modern frameworks for fast, scalable, and beautiful user experiences.",
+    features: ["React & Next.js", "Supabase & MongoDB", "TailwindCSS"],
     gradient: "from-[#3b82f6] to-[#1d4ed8]",
     glow: "group-hover:shadow-[0_0_80px_rgba(59,130,246,0.3)]",
   },
   {
     icon: Smartphone,
-    title: "Mobile App Development",
+    title: "Mobile Apps",
     description:
-      "Native and cross-platform mobile applications that deliver exceptional performance and user experience across all devices.",
-    features: ["iOS & Android", "Cross-Platform", "Offline-First"],
+      "Mobile applications developed using Unity C#, delivering smooth and engaging experiences across iOS and Android platforms.",
+    features: ["Unity C#", "Cross-Platform", "iOS & Android"],
     gradient: "from-[#7c3aed] to-[#5b21b6]",
     glow: "group-hover:shadow-[0_0_80px_rgba(124,58,237,0.3)]",
   },
   {
-    icon: View,
-    title: "AR Applications",
+    icon: Gamepad2,
+    title: "Game Development",
     description:
-      "Immersive augmented reality experiences that bridge the digital and physical worlds for training, marketing, and entertainment.",
-    features: ["Unity & AR Foundation", "WebXR", "Spatial Computing"],
+      "Creating small but exciting Unity games packed with creative gameplay, polished visuals, and memorable experiences.",
+    features: ["Unity Engine", "C# Scripting", "2D & 3D Games"],
     gradient: "from-[#fbbf24] to-[#d97706]",
     glow: "group-hover:shadow-[0_0_80px_rgba(251,191,36,0.3)]",
   },
@@ -47,14 +47,14 @@ export function ServicesSection() {
             What We Build
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance">
-            <span className="text-foreground">Engineering </span>
+            <span className="text-foreground">What We </span>
             <span className="bg-gradient-to-r from-[#7c3aed] to-[#a78bfa] bg-clip-text text-transparent">
-              Excellence
+              Build
             </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty">
-            We specialize in three core areas, delivering cutting-edge solutions
-            that push the boundaries of what&apos;s possible.
+            We focus on three core areas — building impactful web applications,
+            mobile apps with Unity, and exciting games.
           </p>
         </div>
 

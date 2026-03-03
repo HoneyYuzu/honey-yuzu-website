@@ -34,38 +34,41 @@ export function HeroSection() {
 
         {/* Main headline */}
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold tracking-tight mb-6 text-balance">
-          <span className="text-foreground">Building the </span>
+          <span className="text-foreground">Creative Hub for </span>
           <span className="bg-linear-to-r from-[#fbbf24] via-[#f59e0b] to-[#fbbf24] bg-clip-text text-transparent">
-            Future
+            Innovative
           </span>
           <br />
-          <span className="text-foreground">of Digital Experience</span>
+          <span className="text-foreground">Digital Projects</span>
         </h1>
 
         {/* Subheadline */}
         <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto mb-10 leading-relaxed text-pretty">
-          A private software studio crafting innovative Web, Mobile, and
-          Augmented Reality applications for universities and industry partners.
+          Welcome to Honey Yuzu – where we develop innovative web apps and Unity
+          games using modern technologies like React, Next.js, Supabase, MongoDB,
+          and Unity.
         </p>
 
         {/* CTA buttons */}
         <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-            <a href="https://github.com/HoneyYuzu" target="_blank" rel="noopener noreferrer">
+          <a href="#projects">
             <Button
               size="lg"
               className="bg-[#fbbf24] hover:bg-[#f59e0b] text-[#050816] font-semibold px-8 py-6 text-lg group transition-all duration-300 hover:shadow-[0_0_40px_rgba(251,191,36,0.4)]"
             >
-              View Our Work
+              View Our Projects
               <ArrowRight className="ml-2 w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </Button>
-            </a>
-          <Button
-            variant="outline"
-            size="lg"
-            className="border-border hover:border-[#7c3aed]/50 text-foreground px-8 py-6 text-lg backdrop-blur-sm hover:bg-[#7c3aed]/10 transition-all duration-300 bg-transparent"
-          >
-            Get in Touch
-          </Button>
+          </a>
+          <a href="#contact">
+            <Button
+              variant="outline"
+              size="lg"
+              className="border-border hover:border-[#7c3aed]/50 text-foreground px-8 py-6 text-lg backdrop-blur-sm hover:bg-[#7c3aed]/10 transition-all duration-300 bg-transparent"
+            >
+              Get in Touch
+            </Button>
+          </a>
         </div>
 
         {/* Service highlights */}
@@ -73,7 +76,7 @@ export function HeroSection() {
           {[
             { icon: Code2, label: "Web Development" },
             { icon: Smartphone, label: "Mobile Apps" },
-            { icon: View, label: "AR Experiences" },
+            { icon: View, label: "Unity Games" },
           ].map((item) => (
             <div
               key={item.label}

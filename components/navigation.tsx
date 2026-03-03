@@ -53,12 +53,14 @@ export function Navigation() {
 
         {/* CTA */}
         <div className="hidden md:block">
-          <Button
-            size="sm"
-            className="bg-[#fbbf24] hover:bg-[#f59e0b] text-[#050816] font-medium"
-          >
-            Contact Us
-          </Button>
+          <a href="#contact">
+            <Button
+              size="sm"
+              className="bg-[#fbbf24] hover:bg-[#f59e0b] text-[#050816] font-medium"
+            >
+              Contact Us
+            </Button>
+          </a>
         </div>
 
         {/* Mobile menu button */}
@@ -87,8 +89,9 @@ export function Navigation() {
             ))}
             <Button
               className="bg-[#fbbf24] hover:bg-[#f59e0b] text-[#050816] font-medium mt-4"
+              onClick={() => setIsMobileMenuOpen(false)}
             >
-              Contact Us
+              <a href="#contact">Contact Us</a>
             </Button>
           </div>
         </div>

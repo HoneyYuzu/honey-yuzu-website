@@ -37,7 +37,7 @@ export function Footer() {
                 Honey Yuzu
               </span>
               <span className="text-xs text-muted-foreground">
-                AR, VR & MR Solutions
+                Web Apps &amp; Unity Games
               </span>
             </div>
           </a>

@@ -1,39 +1,189 @@
 "use client";
 
-import { ArrowUpRight, Home, Car, TreePine } from "lucide-react";
+import { ArrowUpRight, Home, Car, TreePine, Navigation, Building2, Activity } from "lucide-react";
 
-const projects = [
+type Project = {
+  title: string;
+  category: string;
+  description: string;
+  icon: React.ElementType;
+  tech: string[];
+  color: string;
+  image: string;
+  status: "Completed" | "In Progress";
+  liveUrl?: string;
+};
+
+const webProjects: Project[] = [
   {
     title: "Room Takeover",
-    category: "Web Platform",
+    category: "Web Application",
     description:
-      "A sophisticated web platform enabling real-time collaborative experiences for interactive room management and event coordination.",
+      "A room finder platform for students near ABAC University. Browse available listings, filter by price and location, and connect with landlords — powered by Supabase.",
     icon: Home,
-    tech: ["React", "Firebase", "Real-time DB"],
+    tech: ["Next.js", "React", "Supabase", "TailwindCSS"],
     color: "#3b82f6",
     image: "linear-gradient(135deg, #1e3a5f 0%, #0f172a 50%, #1e1b4b 100%)",
+    status: "Completed",
+    liveUrl: "https://roomfinder-abac.vercel.app/",
   },
+];
+
+const arProjects: Project[] = [
   {
     title: "AR MG",
     category: "Automotive AR",
     description:
-      "An immersive augmented reality showcase for automotive visualization, allowing users to explore vehicle features in their environment.",
+      "An immersive augmented reality showcase for automotive visualization, letting users explore MG vehicle features overlaid in their real environment.",
     icon: Car,
-    tech: ["Unity", "AR Foundation", "3D Rendering"],
+    tech: ["Unity", "AR Foundation", "C#", "3D Rendering"],
     color: "#7c3aed",
     image: "linear-gradient(135deg, #2e1065 0%, #1e1b4b 50%, #0f172a 100%)",
+    status: "Completed",
   },
   {
-    title: "AR Christmas Tree",
+    title: "AR Christmas",
     category: "Interactive AR",
     description:
-      "A magical interactive AR experience bringing holiday decorations to life with gesture controls and dynamic animations.",
+      "A festive interactive AR experience bringing holiday decorations to life with gesture controls, dynamic animations, and spatial audio.",
     icon: TreePine,
-    tech: ["Unity", "WebXR", "Spatial Audio"],
-    color: "#fbbf24",
-    image: "linear-gradient(135deg, #422006 0%, #1e1b4b 50%, #0f172a 100%)",
+    tech: ["Unity", "AR Foundation", "C#"],
+    color: "#10b981",
+    image: "linear-gradient(135deg, #064e3b 0%, #1e1b4b 50%, #0f172a 100%)",
+    status: "Completed",
+  },
+  {
+    title: "AR NAV",
+    category: "AR Navigation",
+    description:
+      "An augmented reality navigation app that overlays directional waypoints and points of interest onto the live camera view to guide users.",
+    icon: Navigation,
+    tech: ["Unity", "AR Foundation", "C#", "GPS"],
+    color: "#f59e0b",
+    image: "linear-gradient(135deg, #451a03 0%, #1e1b4b 50%, #0f172a 100%)",
+    status: "Completed",
   },
 ];
+
+const futureProjects: Project[] = [
+  {
+    title: "VMES Tour",
+    category: "Campus AR Tour",
+    description:
+      "An augmented reality campus tour experience for VMES, guiding visitors through key locations with interactive AR markers and information overlays.",
+    icon: Building2,
+    tech: ["Unity", "AR Foundation", "C#"],
+    color: "#ec4899",
+    image: "linear-gradient(135deg, #500724 0%, #1e1b4b 50%, #0f172a 100%)",
+    status: "In Progress",
+  },
+  {
+    title: "MediaPipe Pose AR",
+    category: "AR (Android)",
+    description:
+      "An AR application using MediaPipe for real-time human pose estimation, overlaying body landmark visualizations onto the live camera view.",
+    icon: Activity,
+    tech: ["Unity", "AR Foundation", "MediaPipe", "C#"],
+    color: "#6366f1",
+    image: "linear-gradient(135deg, #1e1b4b 0%, #0f172a 50%, #1e3a5f 100%)",
+    status: "In Progress",
+  },
+];
+
+function ProjectCard({ project }: { project: Project }) {
+  return (
+    <div
+      className="group relative rounded-2xl overflow-hidden border border-border/50 bg-card backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 flex flex-col"
+      style={{ boxShadow: `0 0 0 0 ${project.color}00` }}
+      onMouseEnter={(e) => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 60px ${project.color}30`;
+      }}
+      onMouseLeave={(e) => {
+        (e.currentTarget as HTMLDivElement).style.boxShadow = `0 0 0 0 ${project.color}00`;
+      }}
+    >
+      {/* Preview area */}
+      <div className="h-44 relative shrink-0" style={{ background: project.image }}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div
+            className="p-5 rounded-2xl backdrop-blur-sm"
+            style={{ backgroundColor: `${project.color}20` }}
+          >
+            <project.icon className="w-10 h-10" style={{ color: project.color }} />
+          </div>
+        </div>
+        {/* Category badge */}
+        <div className="absolute top-3 left-3">
+          <span
+            className="px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md"
+            style={{ backgroundColor: `${project.color}20`, color: project.color }}
+          >
+            {project.category}
+          </span>
+        </div>
+        {/* Status badge */}
+        <div className="absolute top-3 right-3">
+          <span
+            className={`px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-md border ${
+              project.status === "Completed"
+                ? "bg-emerald-500/20 border-emerald-500/30 text-emerald-400"
+                : "bg-amber-500/20 border-amber-500/30 text-amber-400"
+            }`}
+          >
+            {project.status === "In Progress" ? "🔧 In Progress" : "✓ Completed"}
+          </span>
+        </div>
+      </div>
+
+      {/* Content */}
+      <div className="p-5 flex flex-col flex-1">
+        <h3 className="text-lg font-semibold text-foreground mb-2 flex items-start justify-between gap-2">
+          {project.title}
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="shrink-0 p-1.5 rounded-lg hover:bg-white/10 transition-colors"
+              title="View Live Demo"
+            >
+              <ArrowUpRight className="w-4 h-4 text-muted-foreground hover:text-foreground" />
+            </a>
+          )}
+        </h3>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
+          {project.description}
+        </p>
+
+        {/* Tech stack */}
+        <div className="flex flex-wrap gap-2 mt-auto">
+          {project.tech.map((tech) => (
+            <span
+              key={tech}
+              className="px-2.5 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Live demo link */}
+        {project.liveUrl && (
+          <a
+            href={project.liveUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="mt-4 flex items-center gap-1.5 text-sm font-medium transition-colors group/link"
+            style={{ color: project.color }}
+          >
+            <span>View Live Demo</span>
+            <ArrowUpRight className="w-4 h-4 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+          </a>
+        )}
+      </div>
+    </div>
+  );
+}
 
 export function ProjectsSection() {
   return (
@@ -47,90 +197,63 @@ export function ProjectsSection() {
         {/* Section header */}
         <div className="text-center mb-20">
           <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium uppercase tracking-widest bg-[#fbbf24]/10 text-[#fbbf24] border border-[#fbbf24]/20 mb-6">
-            Featured Work
+            Our Work
           </span>
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight mb-6 text-balance">
-            <span className="text-foreground">Projects That </span>
+            <span className="text-foreground">Projects We&apos;ve </span>
             <span className="bg-gradient-to-r from-[#fbbf24] to-[#f59e0b] bg-clip-text text-transparent">
-              Inspire
+              Built
             </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty">
-            A selection of our recent work showcasing innovation across web, mobile,
-            and augmented reality platforms.
+            Real projects shipped by Honey Yuzu — from live web platforms to
+            immersive AR experiences built with Unity.
           </p>
         </div>
 
-        {/* Projects grid */}
-        <div className="grid lg:grid-cols-3 gap-6">
-          {projects.map((project) => (
-            <div
-              key={project.title}
-              className="group relative rounded-2xl overflow-hidden border border-border/50 bg-card backdrop-blur-xl transition-all duration-500 hover:-translate-y-2"
-              style={{
-                boxShadow: `0 0 0 0 ${project.color}00`,
-              }}
-              onMouseEnter={(e) => {
-                e.currentTarget.style.boxShadow = `0 0 60px ${project.color}30`;
-              }}
-              onMouseLeave={(e) => {
-                e.currentTarget.style.boxShadow = `0 0 0 0 ${project.color}00`;
-              }}
-            >
-              {/* Project image/preview area */}
-              <div
-                className="h-48 relative"
-                style={{ background: project.image }}
-              >
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div
-                    className="p-6 rounded-2xl backdrop-blur-sm"
-                    style={{ backgroundColor: `${project.color}20` }}
-                  >
-                    <project.icon
-                      className="w-12 h-12"
-                      style={{ color: project.color }}
-                    />
-                  </div>
-                </div>
-                {/* Category badge */}
-                <div className="absolute top-4 left-4">
-                  <span
-                    className="px-3 py-1 rounded-full text-xs font-medium backdrop-blur-md"
-                    style={{
-                      backgroundColor: `${project.color}20`,
-                      color: project.color,
-                    }}
-                  >
-                    {project.category}
-                  </span>
-                </div>
-              </div>
+        {/* Web Projects */}
+        <div className="mb-16">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-sm font-semibold uppercase tracking-widest text-[#3b82f6]">
+              Web
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[#3b82f6]/30 to-transparent" />
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {webProjects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </div>
+        </div>
 
-              {/* Content */}
-              <div className="p-6">
-                <h3 className="text-xl font-semibold text-foreground mb-2 flex items-center justify-between">
-                  {project.title}
-                  <ArrowUpRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-                  {project.description}
-                </p>
+        {/* AR Projects */}
+        <div className="mb-16">
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-sm font-semibold uppercase tracking-widest text-[#7c3aed]">
+              AR &amp; Mobile
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[#7c3aed]/30 to-transparent" />
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {arProjects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </div>
+        </div>
 
-                {/* Tech stack */}
-                <div className="flex flex-wrap gap-2">
-                  {project.tech.map((tech) => (
-                    <span
-                      key={tech}
-                      className="px-2.5 py-1 rounded-md text-xs font-medium bg-secondary text-secondary-foreground"
-                    >
-                      {tech}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </div>
-          ))}
+        {/* Future / In-Progress Projects */}
+        <div>
+          <div className="flex items-center gap-4 mb-8">
+            <span className="text-sm font-semibold uppercase tracking-widest text-[#fbbf24]">
+              Coming Soon
+            </span>
+            <div className="flex-1 h-px bg-gradient-to-r from-[#fbbf24]/30 to-transparent" />
+          </div>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {futureProjects.map((project) => (
+              <ProjectCard key={project.title} project={project} />
+            ))}
+          </div>
         </div>
       </div>
     </section>

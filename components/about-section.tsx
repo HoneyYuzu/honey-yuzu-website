@@ -6,22 +6,22 @@ const values = [
   {
     icon: Rocket,
     title: "Innovation First",
-    description: "We push boundaries and explore emerging technologies to deliver solutions that set you apart.",
+    description: "We explore modern technologies to build web apps and Unity games that stand out.",
   },
   {
     icon: Target,
-    title: "Focused Delivery",
-    description: "Small team, big impact. We maintain agility and precision throughout every project.",
+    title: "User-Friendly",
+    description: "Every product we build is crafted with the end user in mind — clean, intuitive, and accessible.",
   },
   {
     icon: Users,
-    title: "Partnership Approach",
-    description: "We work closely with universities and industry partners to co-create meaningful solutions.",
+    title: "Open Collaboration",
+    description: "We welcome partners and contributors. Building together creates better products.",
   },
   {
     icon: Zap,
-    title: "Technical Excellence",
-    description: "Engineering-driven development with a commitment to quality, performance, and scalability.",
+    title: "Scalable Solutions",
+    description: "From day one we design for growth — scalable architecture, clean code, impactful results.",
   },
 ];
 
@@ -42,35 +42,34 @@ export function AboutSection() {
               About Us
             </span>
             <h2 className="text-4xl md:text-5xl font-bold tracking-tight mb-6 text-balance">
-              <span className="text-foreground">A Small Studio with </span>
+              <span className="text-foreground">A Studio with a </span>
               <span className="bg-gradient-to-r from-[#7c3aed] to-[#a78bfa] bg-clip-text text-transparent">
-                Big Vision
+                Big Mission
               </span>
             </h2>
             <div className="space-y-4 text-muted-foreground leading-relaxed">
               <p>
-                Honey Yuzu is a private software studio founded with a mission to bridge
-                the gap between cutting-edge research and real-world applications.
+                Honey Yuzu Studio was founded by a small team of passionate
+                developers with a goal to build high-quality software solutions
+                using modern technologies.
               </p>
               <p>
-                We&apos;re a small, agile team of engineers and designers who thrive on
-                challenging projects. Our project-based approach means we bring focused
-                expertise to every engagement, whether it&apos;s building a complex web platform
-                or pioneering new AR experiences.
+                Our mission is to create user-friendly, scalable, and impactful
+                digital solutions while learning and growing as developers. We
+                believe in the power of collaboration and open innovation.
               </p>
               <p>
-                Our collaborations with universities and industry partners have given us
-                unique insight into emerging technologies and how to apply them
-                meaningfully.
+                We&apos;re open to collaboration! If you&apos;re interested in working
+                with us, feel free to reach out and let&apos;s build something amazing
+                together.
               </p>
             </div>
 
             {/* Stats */}
-            <div className="grid grid-cols-3 gap-6 mt-10">
+            <div className="grid grid-cols-2 gap-6 mt-10">
               {[
-                { value: "15+", label: "Projects Delivered" },
-                { value: "5+", label: "Research Partners" },
                 { value: "3", label: "Core Specialties" },
+                { value: "∞", label: "Ideas to Build" },
               ].map((stat) => (
                 <div key={stat.label} className="text-center">
                   <div className="text-3xl font-bold text-primary mb-1">{stat.value}</div>

@@ -1,5 +1,33 @@
 "use client";
 
+const techCategories = [
+  {
+    label: "Frontend",
+    color: "#3b82f6",
+    techs: ["React", "Next.js", "TailwindCSS"],
+  },
+  {
+    label: "Backend",
+    color: "#7c3aed",
+    techs: ["Node.js", "Express", "Firebase", "Supabase"],
+  },
+  {
+    label: "Database",
+    color: "#10b981",
+    techs: ["MongoDB", "PostgreSQL"],
+  },
+  {
+    label: "Game / Mobile",
+    color: "#fbbf24",
+    techs: ["Unity", "C#"],
+  },
+  {
+    label: "Version Control",
+    color: "#f97316",
+    techs: ["GitHub", "Unity VCS (Plastic SCM)"],
+  },
+];
+
 const technologies = [
   {
     name: "React",
@@ -46,7 +74,7 @@ const technologies = [
   },
   {
     name: "Unity",
-    category: "AR/VR",
+    category: "Game / Mobile",
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
         <path d="m18.48 16.2-2.71-4.7 2.71-4.7 1.76 4.7-1.76 4.7Zm-5.84-6.1L15.35 5l4.36.76-3.56 3.58-3.51.76Zm0 2.8 3.51.76 3.56 3.58-4.36.76-2.71-5.1ZM4.29 12l6.13-10.6 2.23 4.5L8.86 12l3.79 6.1-2.23 4.5L4.29 12Z" />
@@ -54,22 +82,20 @@ const technologies = [
     ),
   },
   {
-    name: "AR Foundation",
-    category: "AR/VR",
+    name: "MongoDB",
+    category: "Database",
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
-        <path d="M12 2 2 7l10 5 10-5-10-5Zm0 15-10-5v5l10 5 10-5v-5l-10 5Z" />
+        <path d="M12 2C9.37 2 7 4.9 7 8.5c0 2.6 1.2 4.9 3 6.2V20a2 2 0 0 0 4 0v-5.3c1.8-1.3 3-3.6 3-6.2C17 4.9 14.63 2 12 2Zm0 14.5c-.28 0-.5-.22-.5-.5V9.5c0-.28.22-.5.5-.5s.5.22.5.5V16c0 .28-.22.5-.5.5Z" />
       </svg>
     ),
   },
   {
-    name: "WebXR",
-    category: "AR/VR",
+    name: "TailwindCSS",
+    category: "Frontend",
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
-        <path d="M3 6a3 3 0 0 1 3-3h12a3 3 0 0 1 3 3v8a3 3 0 0 1-3 3H6a3 3 0 0 1-3-3V6Zm5 12v2h8v-2H8Zm-2 4v-2h12v2H6Z" />
-        <circle cx="8" cy="10" r="2" />
-        <circle cx="16" cy="10" r="2" />
+        <path d="M12 6C9.33 6 7.67 7.33 7 10c1-1.33 2.17-1.83 3.5-1.5.76.19 1.3.74 1.9 1.35.98 1 2.09 2.15 4.6 2.15 2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.3-.74-1.9-1.35C15.62 7.15 14.51 6 12 6Zm-5 6C4.33 12 2.67 13.33 2 16c1-1.33 2.17-1.83 3.5-1.5.76.19 1.3.74 1.9 1.35.98 1 2.09 2.15 4.6 2.15 2.67 0 4.33-1.33 5-4-1 1.33-2.17 1.83-3.5 1.5-.76-.19-1.3-.74-1.9-1.35C10.62 13.15 9.51 12 7 12Z" />
       </svg>
     ),
   },
@@ -105,13 +131,46 @@ export function TechStackSection() {
             </span>
           </h2>
           <p className="text-muted-foreground text-lg max-w-2xl mx-auto text-pretty">
-            We leverage cutting-edge technologies to build scalable, performant,
-            and future-proof applications.
+            Our planned tech stack — chosen for performance, scalability, and
+            developer experience across all our project types.
           </p>
         </div>
 
-        {/* Tech grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        {/* Categorised tech stack */}
+        <div className="space-y-8">
+          {techCategories.map((cat) => (
+            <div key={cat.label} className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+              {/* Category label */}
+              <div
+                className="shrink-0 w-36 text-sm font-semibold uppercase tracking-widest"
+                style={{ color: cat.color }}
+              >
+                {cat.label}
+              </div>
+              {/* Divider line */}
+              <div className="hidden sm:block w-px h-6 bg-border/50" />
+              {/* Badges */}
+              <div className="flex flex-wrap gap-3">
+                {cat.techs.map((tech) => (
+                  <span
+                    key={tech}
+                    className="px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 hover:-translate-y-0.5"
+                    style={{
+                      backgroundColor: `${cat.color}10`,
+                      borderColor: `${cat.color}30`,
+                      color: cat.color,
+                    }}
+                  >
+                    {tech}
+                  </span>
+                ))}
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Animated icon grid for the main eight techs */}
+        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
           {technologies.map((tech) => (
             <div
               key={tech.name}
@@ -127,18 +186,6 @@ export function TechStackSection() {
                 </div>
               </div>
             </div>
-          ))}
-        </div>
-
-        {/* Additional tech badges */}
-        <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
-          {["Node.js", "PostgreSQL", "Redis", "Docker", "AWS", "Vercel", "Git", "Figma"].map((tech) => (
-            <span
-              key={tech}
-              className="px-4 py-2 rounded-full text-sm font-medium bg-secondary/50 text-muted-foreground border border-border/50 hover:text-foreground hover:border-border transition-colors"
-            >
-              {tech}
-            </span>
           ))}
         </div>
       </div>
