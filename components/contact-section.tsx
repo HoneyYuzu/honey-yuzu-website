@@ -51,7 +51,7 @@ export function ContactSection() {
   return (
     <section id="contact" className="relative py-32 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-[#050816]">
+      <div className="absolute inset-0 bg-background">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-border to-transparent" />
         <div className="absolute bottom-0 left-1/4 w-96 h-96 bg-[#fbbf24]/10 rounded-full blur-[150px]" />
         <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-[#7c3aed]/10 rounded-full blur-[120px]" />

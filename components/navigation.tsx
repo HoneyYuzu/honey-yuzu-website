@@ -1,7 +1,8 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Sun, Moon } from "lucide-react";
+import { useTheme } from "next-themes";
 import { Button } from "@/components/ui/button";
 
 const navLinks = [
@@ -14,6 +15,10 @@ const navLinks = [
 export function Navigation() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+  const { theme, setTheme } = useTheme();
+
+  useEffect(() => { setMounted(true); }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,7 +32,7 @@ export function Navigation() {
     <header
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-[#050816]/80 backdrop-blur-xl border-b border-border/50"
+          ? "bg-background/80 backdrop-blur-xl border-b border-border/50"
           : "bg-transparent"
       }`}
     >
@@ -51,8 +56,17 @@ export function Navigation() {
           ))}
         </div>
 
-        {/* CTA */}
-        <div className="hidden md:block">
+        {/* CTA + theme toggle */}
+        <div className="hidden md:flex items-center gap-3">
+          {mounted && (
+            <button
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="p-2 rounded-lg text-muted-foreground hover:text-foreground hover:bg-secondary/80 transition-colors"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+            </button>
+          )}
           <a href="#contact">
             <Button
               size="sm"
@@ -75,7 +89,7 @@ export function Navigation() {
 
       {/* Mobile menu */}
       {isMobileMenuOpen && (
-        <div className="md:hidden absolute top-20 left-0 right-0 bg-[#050816]/95 backdrop-blur-xl border-b border-border/50">
+        <div className="md:hidden absolute top-20 left-0 right-0 bg-background/95 backdrop-blur-xl border-b border-border/50">
           <div className="flex flex-col p-6 gap-4">
             {navLinks.map((link) => (
               <a
@@ -87,6 +101,15 @@ export function Navigation() {
                 {link.label}
               </a>
             ))}
+            {mounted && (
+              <button
+                onClick={() => { setTheme(theme === "dark" ? "light" : "dark"); setIsMobileMenuOpen(false); }}
+                className="flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground py-2 transition-colors"
+              >
+                {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
+                {theme === "dark" ? "Light Mode" : "Dark Mode"}
+              </button>
+            )}
             <Button
               className="bg-[#fbbf24] hover:bg-[#f59e0b] text-[#050816] font-medium mt-4"
               onClick={() => setIsMobileMenuOpen(false)}

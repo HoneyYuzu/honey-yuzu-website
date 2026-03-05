@@ -22,7 +22,7 @@ const socialLinks = [
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-border/50 bg-[#050816]">
+    <footer className="relative border-t border-border/50 bg-background">
       <div className="max-w-6xl mx-auto px-6 py-10">
         <div className="flex flex-col md:flex-row items-center justify-between gap-8">
           {/* Logo & branding */}
