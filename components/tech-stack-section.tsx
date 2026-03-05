@@ -1,5 +1,26 @@
 "use client";
 
+import { useEffect, useRef, useState } from "react";
+
+function useInView(options?: IntersectionObserverInit) {
+  const ref = useRef<HTMLDivElement>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(([entry]) => {
+      if (entry.isIntersecting) {
+        setInView(true);
+        observer.disconnect();
+      }
+    }, options);
+    if (ref.current) observer.observe(ref.current);
+    return () => observer.disconnect();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return { ref, inView };
+}
+
 const techCategories = [
   {
     label: "Frontend",
@@ -17,7 +38,7 @@ const techCategories = [
     techs: ["MongoDB", "PostgreSQL"],
   },
   {
-    label: "Game / Mobile",
+    label: "AR / VR / Game Dev",
     color: "#fbbf24",
     techs: ["Unity", "C#"],
   },
@@ -74,7 +95,7 @@ const technologies = [
   },
   {
     name: "Unity",
-    category: "Game / Mobile",
+    category: "AR / VR / Game Dev",
     icon: (
       <svg viewBox="0 0 24 24" className="w-8 h-8" fill="currentColor">
         <path d="m18.48 16.2-2.71-4.7 2.71-4.7 1.76 4.7-1.76 4.7Zm-5.84-6.1L15.35 5l4.36.76-3.56 3.58-3.51.76Zm0 2.8 3.51.76 3.56 3.58-4.36.76-2.71-5.1ZM4.29 12l6.13-10.6 2.23 4.5L8.86 12l3.79 6.1-2.23 4.5L4.29 12Z" />
@@ -111,6 +132,10 @@ const technologies = [
 ];
 
 export function TechStackSection() {
+  const { ref: headerRef, inView: headerInView } = useInView({ threshold: 0.2 });
+  const { ref: catsRef, inView: catsInView } = useInView({ threshold: 0.1 });
+  const { ref: gridRef, inView: gridInView } = useInView({ threshold: 0.1 });
+
   return (
     <section id="tech" className="relative py-32 overflow-hidden">
       {/* Background */}
@@ -120,7 +145,12 @@ export function TechStackSection() {
 
       <div className="relative z-10 max-w-6xl mx-auto px-6">
         {/* Section header */}
-        <div className="text-center mb-20">
+        <div
+          ref={headerRef}
+          className={`text-center mb-20 transition-all duration-700 ease-out ${
+            headerInView ? "opacity-100 translate-y-0" : "opacity-0 translate-y-10"
+          }`}
+        >
           <span className="inline-block px-4 py-1.5 rounded-full text-xs font-medium uppercase tracking-widest bg-[#3b82f6]/10 text-[#60a5fa] border border-[#3b82f6]/20 mb-6">
             Technology
           </span>
@@ -137,9 +167,15 @@ export function TechStackSection() {
         </div>
 
         {/* Categorised tech stack */}
-        <div className="space-y-8">
-          {techCategories.map((cat) => (
-            <div key={cat.label} className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
+        <div ref={catsRef} className="space-y-8">
+          {techCategories.map((cat, i) => (
+            <div
+              key={cat.label}
+              className={`flex flex-col sm:flex-row items-start sm:items-center gap-4 transition-all duration-700 ease-out ${
+                catsInView ? "opacity-100 translate-x-0" : "opacity-0 -translate-x-10"
+              }`}
+              style={{ transitionDelay: `${i * 100}ms` }}
+            >
               {/* Category label */}
               <div
                 className="shrink-0 w-36 text-sm font-semibold uppercase tracking-widest"
@@ -151,14 +187,17 @@ export function TechStackSection() {
               <div className="hidden sm:block w-px h-6 bg-border/50" />
               {/* Badges */}
               <div className="flex flex-wrap gap-3">
-                {cat.techs.map((tech) => (
+                {cat.techs.map((tech, j) => (
                   <span
                     key={tech}
-                    className="px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 hover:-translate-y-0.5"
+                    className={`px-4 py-2 rounded-full text-sm font-medium border transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${
+                      catsInView ? "opacity-100 scale-100" : "opacity-0 scale-90"
+                    }`}
                     style={{
                       backgroundColor: `${cat.color}10`,
                       borderColor: `${cat.color}30`,
                       color: cat.color,
+                      transitionDelay: `${i * 100 + j * 60}ms`,
                     }}
                   >
                     {tech}
@@ -170,18 +209,23 @@ export function TechStackSection() {
         </div>
 
         {/* Animated icon grid for the main eight techs */}
-        <div className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {technologies.map((tech) => (
+        <div ref={gridRef} className="mt-20 grid grid-cols-2 md:grid-cols-4 gap-4">
+          {technologies.map((tech, i) => (
             <div
               key={tech.name}
-              className="group relative p-6 rounded-xl border border-border/50 bg-card/50 backdrop-blur-xl transition-all duration-300 hover:bg-card hover:border-[#3b82f6]/30 hover:-translate-y-1"
+              className={`group relative p-6 rounded-xl border border-border/50 bg-card/50 backdrop-blur-xl transition-all duration-500 ease-out hover:bg-card hover:border-[#3b82f6]/40 hover:-translate-y-2 hover:shadow-[0_0_30px_rgba(59,130,246,0.15)] ${
+                gridInView ? "opacity-100 scale-100 translate-y-0" : "opacity-0 scale-90 translate-y-8"
+              }`}
+              style={{ transitionDelay: `${i * 70}ms` }}
             >
               <div className="flex flex-col items-center text-center gap-3">
-                <div className="text-muted-foreground group-hover:text-[#60a5fa] transition-colors">
+                <div className="text-muted-foreground group-hover:text-[#60a5fa] transition-all duration-300 group-hover:scale-110 group-hover:rotate-6 group-hover:drop-shadow-[0_0_8px_rgba(96,165,250,0.6)]">
                   {tech.icon}
                 </div>
                 <div>
-                  <h3 className="font-semibold text-foreground">{tech.name}</h3>
+                  <h3 className="font-semibold text-foreground transition-colors duration-300 group-hover:text-[#60a5fa]">
+                    {tech.name}
+                  </h3>
                   <p className="text-xs text-muted-foreground">{tech.category}</p>
                 </div>
               </div>

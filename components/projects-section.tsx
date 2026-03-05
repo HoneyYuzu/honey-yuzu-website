@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Home, Car, TreePine, Navigation, Building2, Activity } from "lucide-react";
+import { ArrowUpRight, Home, Car, TreePine, Navigation, Building2, Activity, Play } from "lucide-react";
 
 type Project = {
   title: string;
@@ -12,6 +12,7 @@ type Project = {
   image: string;
   status: "Completed" | "In Progress";
   liveUrl?: string;
+  videoUrl?: string;
 };
 
 const webProjects: Project[] = [
@@ -40,6 +41,7 @@ const arProjects: Project[] = [
     color: "#7c3aed",
     image: "linear-gradient(135deg, #2e1065 0%, #1e1b4b 50%, #0f172a 100%)",
     status: "Completed",
+    videoUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7419034795587973121",
   },
   {
     title: "AR Christmas",
@@ -51,6 +53,7 @@ const arProjects: Project[] = [
     color: "#10b981",
     image: "linear-gradient(135deg, #064e3b 0%, #1e1b4b 50%, #0f172a 100%)",
     status: "Completed",
+    videoUrl: "https://www.instagram.com/reel/DStZgYwj1YY/?igsh=MXZya2NkYnVnYnp2eg%3D%3D",
   },
   {
     title: "AR NAV",
@@ -62,6 +65,7 @@ const arProjects: Project[] = [
     color: "#f59e0b",
     image: "linear-gradient(135deg, #451a03 0%, #1e1b4b 50%, #0f172a 100%)",
     status: "Completed",
+    videoUrl: "https://www.linkedin.com/feed/update/urn:li:activity:7427169519195930624",
   },
 ];
 
@@ -137,19 +141,8 @@ function ProjectCard({ project }: { project: Project }) {
 
       {/* Content */}
       <div className="p-5 flex flex-col flex-1">
-        <h3 className="text-lg font-semibold text-foreground mb-2 flex items-start justify-between gap-2">
+        <h3 className="text-lg font-semibold text-foreground mb-2">
           {project.title}
-          {project.liveUrl && (
-            <a
-              href={project.liveUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="shrink-0 p-1.5 rounded-lg hover:bg-white/10 transition-colors"
-              title="View Live Demo"
-            >
-              <ArrowUpRight className="w-4 h-4 text-muted-foreground hover:text-foreground" />
-            </a>
-          )}
         </h3>
         <p className="text-muted-foreground text-sm leading-relaxed mb-4 flex-1">
           {project.description}
@@ -167,19 +160,37 @@ function ProjectCard({ project }: { project: Project }) {
           ))}
         </div>
 
-        {/* Live demo link */}
-        {project.liveUrl && (
-          <a
-            href={project.liveUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="mt-4 flex items-center gap-1.5 text-sm font-medium transition-colors group/link"
-            style={{ color: project.color }}
-          >
-            <span>View Live Demo</span>
-            <ArrowUpRight className="w-4 h-4 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
-          </a>
-        )}
+        {/* Links row */}
+        <div className="mt-4 flex items-center gap-4 flex-wrap">
+          {project.liveUrl && (
+            <a
+              href={project.liveUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-sm font-medium transition-colors group/link"
+              style={{ color: project.color }}
+            >
+              <span>View Live Demo</span>
+              <ArrowUpRight className="w-4 h-4 group-hover/link:translate-x-0.5 group-hover/link:-translate-y-0.5 transition-transform" />
+            </a>
+          )}
+          {project.videoUrl && (
+            <a
+              href={project.videoUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex items-center gap-1.5 text-sm font-medium transition-all duration-200 px-3 py-1.5 rounded-lg border group/vid"
+              style={{
+                color: project.color,
+                borderColor: `${project.color}40`,
+                backgroundColor: `${project.color}10`,
+              }}
+            >
+              <Play className="w-3.5 h-3.5 fill-current group-hover/vid:scale-110 transition-transform" />
+              <span>Watch Demo</span>
+            </a>
+          )}
+        </div>
       </div>
     </div>
   );

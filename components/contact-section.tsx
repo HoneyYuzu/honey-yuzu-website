@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { Send, Linkedin, Instagram, Mail, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,13 @@ type FormState = "idle" | "sending" | "success" | "error";
 export function ContactSection() {
   const [state, setState] = useState<FormState>("idle");
   const [fields, setFields] = useState({ from_name: "", from_email: "", message: "" });
+
+  useEffect(() => {
+    if (state === "success" || state === "error") {
+      const timer = setTimeout(() => setState("idle"), 5000);
+      return () => clearTimeout(timer);
+    }
+  }, [state]);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFields((prev) => ({ ...prev, [e.target.name]: e.target.value }));

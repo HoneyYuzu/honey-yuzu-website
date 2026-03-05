@@ -23,7 +23,7 @@ export function HeroSection() {
         }}
       />
 
-      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center">
+      <div className="relative z-10 max-w-6xl mx-auto px-6 text-center pb-20">
         {/* Logo and brand */}
         {/* <div className="flex items-center justify-center gap-3 mb-8">
           <img src="/logo.png" alt="Honey Yuzu" className="w-12 h-12" />
@@ -92,9 +92,9 @@ export function HeroSection() {
       </div>
 
       {/* Scroll indicator */}
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted-foreground">
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col pt-6 items-center gap-2 text-muted-foreground">
         <span className="text-xs uppercase tracking-widest">Scroll</span>
-        <div className="w-px h-8 bg-gradient-to-b from-muted-foreground to-transparent" />
+        <div className="w-px h-8 bg-linear-to-b from-muted-foreground to-transparent" />
       </div>
     </section>
   );
